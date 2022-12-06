@@ -19,10 +19,12 @@
   },
   "homepage": "https://github.com/TeamEevee-36/Phoenix#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "css-loader": "^6.7.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "file-loader": "^6.2.0",
+    "pg": "^8.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.4.4",
