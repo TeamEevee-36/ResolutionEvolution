@@ -26,7 +26,7 @@ function Popup(props) {
         resolution_desc: resDesc.current.value,
         category_name: resCat.current.value,
         user_id: props.user_id,
-        days_todo: daysCheckedArr,
+        days_todo: [...daysCheckedArr],
         resolution_status: 'In Progress',
       }),
     })
@@ -36,6 +36,7 @@ function Popup(props) {
       .then((data) => {
         console.log(data);
       });
+    props.setTrigger(false);
   };
 
   //trigger should be a boolean value indicating buttonclick of "add resolution

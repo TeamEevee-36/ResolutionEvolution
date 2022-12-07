@@ -1,5 +1,4 @@
 // const express = require('express');
-const { EvalSourceMapDevToolPlugin } = require('webpack');
 const User = require('./models/models');
 
 const controller = {};
@@ -16,7 +15,7 @@ controller.loginController = async (req, res, next) => {
       if (password === rows[0].password) {
         res.locals.signedIn = rows[0].id;
         res.cookie('user_id', rows[0].id, {
-          maxAge: 3600000,
+          maxAge: 36000000,
         });
         return next();
       } else {
@@ -104,6 +103,22 @@ controller.addResController = async (req, res, next) => {
       log: `error occured in addRes: ${err}`,
       status: 400,
       message: 'error in addRes',
+    });
+  }
+};
+controller.getResolutions = async (req, res, next) => {
+  try {
+    console.log(req.cookies);
+    const { user_id } = req.cookies;
+    const getResolutionsQuery = `SELECT * FROM resolutions WHERE user_id = ${user_id}`;
+    const { rows } = await User.query(getResolutionsQuery);
+    res.locals.getResolutions = rows;
+    return next();
+  } catch (err) {
+    return next({
+      log: `error occured in getResolutions: ${err}`,
+      status: 400,
+      message: 'error in getResolutions',
     });
   }
 };
