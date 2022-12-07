@@ -35,6 +35,8 @@ function Popup(props) {
       })
       .then((data) => {
         console.log(data);
+        setResolutionData(data);
+        setTrigger(false);
       });
     props.setTrigger(false);
   };

@@ -28,6 +28,7 @@ const Homepage = (props) => {
           console.log('homepage data', data);
           setResolutionData(data);
           setTrigger2(true);
+          setTrigger3(true);
         })
         .catch((err) => console.log('Error in homepage fetch'));
     };
@@ -40,8 +41,13 @@ const Homepage = (props) => {
   return (
     <>
       <h1> This is the header from Homepage </h1>
-      {trigger2 ? <ResolutionChart resolutionData={resolutionData} /> : null}
-      {trigger ? (
+      {trigger3 ? (
+        <ResolutionChart
+          user_id={user_id}
+          resolutionData={resolutionData}
+        />
+      ) : null}
+       {trigger ? (
         <Popup trigger={trigger} setTrigger={setTrigger} user_id={user_id} />
       ) : null}
       <button onClick={() => setTrigger(true)}> Add New Resolution </button>

@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 import Cookies from 'js-cookie';
 
 import styles from './_index.css';
-
+//npm run dev
 //login path should render the login component
 //have to pass a link to the path - theres
 
