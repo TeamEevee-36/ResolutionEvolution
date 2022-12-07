@@ -15,13 +15,6 @@ const Homepage = (props) => {
   const [trigger2, setTrigger2] = useState(false);
   const [trigger3, setTrigger3] = useState(false);
 
-  // console.log(user_id, props.currentUserID);
-
-  // useEffect(() => {
-  //   const cookieId = Cookies.get();
-  //   props.setCurrentUserID(cookieId['user_id']);
-  // });
-
   //useEffect essentially is a callback for the compnentDidMount event listener
   useEffect(() => {
     //add a resolution : resolution category name, description, days of the week you wold perform them on
@@ -47,7 +40,7 @@ const Homepage = (props) => {
   return (
     <>
       <h1> This is the header from Homepage </h1>
-      {trigger3 ? <ResolutionChart resolutionData={resolutionData} /> : null}
+      {trigger2 ? <ResolutionChart resolutionData={resolutionData} /> : null}
       {trigger ? (
         <Popup trigger={trigger} setTrigger={setTrigger} user_id={user_id} />
       ) : null}
