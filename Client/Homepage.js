@@ -4,6 +4,7 @@ import ResolutionChart from './HomepageComponents/ResolutionChart';
 import WeeklyCalendar from './HomepageComponents/WeeklyCalendar';
 import Popup from './HomepageComponents/Popup';
 import Cookies from 'js-cookie';
+import Motivation from './HomepageComponents/Motivation';
 
 //functional components //props shoould be assumed as an object so we can send down multiple variables
 const Homepage = (props) => {
@@ -40,20 +41,23 @@ const Homepage = (props) => {
   //return statement that has like JSX define. Need to wrap in angular brackets as 1 parent element is needed
   return (
     <>
-      <h1> This is the header from Homepage </h1>
+      <h1 className='big-title'> Welcome to Resolution Evolution </h1>
+      <button className='add-button' onClick={() => setTrigger(true)}>
+        {' '}
+        Add New Resolution{' '}
+      </button>
       {trigger3 ? (
-        <ResolutionChart
-          user_id={user_id}
-          resolutionData={resolutionData}
-        />
+        <ResolutionChart user_id={user_id} resolutionData={resolutionData} />
       ) : null}
-       {trigger ? (
+      {trigger ? (
         <Popup trigger={trigger} setTrigger={setTrigger} user_id={user_id} />
       ) : null}
-      <button onClick={() => setTrigger(true)}> Add New Resolution </button>
+
+      <h1 className='cal-title'>Your Weekly Calendar</h1>
       {trigger2 ? (
         <WeeklyCalendar resolutionData={resolutionData} userID={user_id} />
       ) : null}
+      <Motivation />
     </>
   );
 };

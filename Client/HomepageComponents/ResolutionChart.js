@@ -1,4 +1,4 @@
-import React, { useEffect,useLayoutEffect,useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 
 const ResolutionChart = (props) => {
   //define resolution data from Props. Should be an array of resolutions
@@ -6,14 +6,14 @@ const ResolutionChart = (props) => {
   //console.log('RESCHART data', resolutionData);
   const tableInfoArray = [];
   const [fullChart, setFullChart] = useState([]);
-  //synthetic events in react we can use e to reference the exact button without having to name it specically as an argument in the function definion 
-    //check by console.logging and looking at E after you select
+  //synthetic events in react we can use e to reference the exact button without having to name it specically as an argument in the function definion
+  //check by console.logging and looking at E after you select
   const changeProgress = async (e) => {
     console.log('this is e', e.target.value);
     console.log('e.target.id: ', e.target.id);
     //e.target.value will reflect the changed option progress value when a user selects an option from the selection dropdown
     //two pieces of information needed for the fetch request are the target value: e.target.value, and resolution_id : e.target.id - named below
-    await fetch('/api/updateResolution',{
+    await fetch('/api/updateResolution', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,26 +47,27 @@ const ResolutionChart = (props) => {
         setTrigger(false);
       });
       */
-    
   };
 
   const deleteRes = async (e) => {
     console.log('e.target.id: ', e.target.id);
-    await fetch('/api/deleteResolution',{
+    await fetch('/api/deleteResolution', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        resolution_id: (e.target.id).slice(1),
+        resolution_id: e.target.id.slice(1),
       }),
     });
   };
 
   useLayoutEffect(() => {
     for (let i = 0; i < resolutionData.length; i++) {
-        //define variable for sliced todo data to take curly braces off
-      let resolutionData2 = props.resolutionData[i].days_todo.slice(1, props.resolutionData[i].days_todo.length - 1).split(',');
+      //define variable for sliced todo data to take curly braces off
+      let resolutionData2 = props.resolutionData[i].days_todo
+        .slice(1, props.resolutionData[i].days_todo.length - 1)
+        .split(',');
 
       const resolutionData3 = resolutionData2.map((ele) => {
         return ele.slice(1, ele.length - 1);
@@ -92,9 +93,20 @@ const ResolutionChart = (props) => {
           <td>{resolutionData[i].category_name}</td>
           <td>{resolutionData[i].resolution_name}</td>
           <td>{resolutionData[i].resolution_desc}</td>
-          <td>{resolutionData3.join(', ')}</td>
-          <td><select id={resolutionData[i].id} onChange ={changeProgress}>{optionsArr}</select></td>
-          <td><button id={`D${resolutionData[i].id}`} onClick={deleteRes}>X</button></td>
+          <td>
+            <select id={resolutionData[i].id} onChange={changeProgress}>
+              {optionsArr}
+            </select>
+          </td>
+          <td>
+            <button
+              className='delete-btn'
+              id={`D${resolutionData[i].id}`}
+              onClick={deleteRes}
+            >
+              X
+            </button>
+          </td>
         </tr>
       );
       // console.log(tableInfoArray);
@@ -110,7 +122,6 @@ const ResolutionChart = (props) => {
             <th>Category</th>
             <th>Resolution Name</th>
             <th>Description</th>
-            <th>Days of the Week</th>
             <th>Progress</th>
             <th>Delete</th>
           </tr>
