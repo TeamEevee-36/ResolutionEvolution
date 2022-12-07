@@ -12,6 +12,7 @@ const Homepage = (props) => {
   const [resolutionData, setResolutionData] = useState([]);
   // popup depends on trigger value
   const [trigger, setTrigger] = useState(false);
+  console.log(resolutionData)
   // console.log(user_id, props.currentUserID);
 
   // useEffect(() => {
