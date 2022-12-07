@@ -1,17 +1,17 @@
 import React from 'react';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 function Popup(props) {
   const someName = useRef(null);
   const resolution = useRef('');
   const resCat = useRef('');
   const resDesc = useRef('');
-
+  
   const checkingFormAns = (e) => {
     e.preventDefault();
 
     const daysCheckedArr = [];
-    console.log('check: ', e.target[4].checked);
     for (let i = 3; i < 10; i++) {
       if (e.target[i].checked) daysCheckedArr.push(e.target[i].value);
     }
@@ -81,7 +81,7 @@ function Popup(props) {
               Sunday:
               <input type='checkbox' value='Sunday' />
             </span>
-            <button type='submit'>Add Resolution</button>
+            <button onClick={() => {window.location.reload()}} type='submit'>Add Resolution</button>
           </div>
         </form>
       </div>
