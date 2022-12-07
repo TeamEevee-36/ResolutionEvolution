@@ -15,4 +15,8 @@ router.post(
   }
 );
 
+router.post('/resolutions', controller.addResController, (req, res) => {
+  return res.status(201).json(res.locals.resolution);
+});
+
 module.exports = router;

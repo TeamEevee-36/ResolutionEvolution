@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Navbar = () => {
   return (
     <div id='navbar'>
-      <h1>Resolution Solution</h1>
+      <h1>Resolution Evolution</h1>
     </div>
   );
 };
