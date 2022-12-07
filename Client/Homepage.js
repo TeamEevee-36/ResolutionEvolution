@@ -12,7 +12,9 @@ const Homepage = (props) => {
   const [resolutionData, setResolutionData] = useState([]);
   // popup depends on trigger value
   const [trigger, setTrigger] = useState(false);
-  console.log(resolutionData)
+  const [trigger2, setTrigger2] = useState(false);
+  const [trigger3, setTrigger3] = useState(false);
+
   // console.log(user_id, props.currentUserID);
 
   // useEffect(() => {
@@ -20,21 +22,25 @@ const Homepage = (props) => {
   //   props.setCurrentUserID(cookieId['user_id']);
   // });
 
-  /*
   //useEffect essentially is a callback for the compnentDidMount event listener
   useEffect(() => {
     //add a resolution : resolution category name, description, days of the week you wold perform them on
     //perform fetch request. The endpoint below is alloewed bc of proxy which the server will be listening for on the assigned port. Proxy is determine in the webpacl.config
     //assumption for returned data will be a getALL from database where userID = user_id passed from props
-    fetch('/api/resolution')
-      .then((data) => data.json())
-      .then((data) => {
-        //expected array of resolutions
-        setResolutionData(data);
-      })
-      .catch((err) => console.log('Error in homepage fetch'));
+    const fetchdata = async () => {
+      await fetch('/api/getresolutions')
+        .then((data) => data.json())
+        .then((data) => {
+          //expected array of resolutions
+          console.log('homepage data', data);
+          setResolutionData(data);
+          setTrigger2(true);
+          setTrigger3(true);
+        })
+        .catch((err) => console.log('Error in homepage fetch'));
+    };
+    fetchdata();
   }, []);
-*/
 
   //button pop up -
   // console.log('checking homepage re-renders')
@@ -42,12 +48,20 @@ const Homepage = (props) => {
   return (
     <>
       <h1> This is the header from Homepage </h1>
-      <ResolutionChart resolutionData={resolutionData} />
+      {trigger3 ? (
+        <ResolutionChart
+          user_id={user_id}
+          resolutionData={resolutionData}
+        />
+      ) : null}
+
       {trigger ? (
         <Popup trigger={trigger} setTrigger={setTrigger} user_id={user_id} />
       ) : null}
       <button onClick={() => setTrigger(true)}> Add New Resolution </button>
-      <WeeklyCalendar resolutionData={resolutionData} userID={user_id} />
+      {trigger2 ? (
+        <WeeklyCalendar resolutionData={resolutionData} userID={user_id} />
+      ) : null}
     </>
   );
 };
