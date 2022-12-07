@@ -8,8 +8,6 @@ function Popup(props) {
   const resDesc = useRef('');
 
   const checkingFormAns = (e) => {
-    e.preventDefault();
-
     const daysCheckedArr = [];
     console.log('check: ', e.target[4].checked);
     for (let i = 3; i < 10; i++) {
@@ -39,6 +37,7 @@ function Popup(props) {
         setTrigger(false);
       });
     props.setTrigger(false);
+    location.reload();
   };
 
   //trigger should be a boolean value indicating buttonclick of "add resolution
@@ -47,12 +46,21 @@ function Popup(props) {
       <div className='popup'>
         <button onClick={() => props.setTrigger(false)}>close</button>
         <form onSubmit={checkingFormAns}>
-          <span>Resolution Name: </span>
-          <input ref={resolution} type='text' />{' '}
-          {/* someName.current.value to obtain value */}
-          <span>Resolution category: </span> <input type='text' ref={resCat} />
-          <span>Resolution Description: </span>{' '}
-          <input type='text' ref={resDesc} />
+          <div className='popup-textfields'>
+            <span>
+              Resolution Name:
+              <input ref={resolution} type='text' />
+            </span>
+            <br />
+            <span>
+              Resolution category: <input type='text' ref={resCat} />
+            </span>
+            <br />
+            <span>
+              Resolution Description: <input type='text' ref={resDesc} />
+            </span>
+          </div>
+
           <div className='popup-days'>
             <span>
               Monday:

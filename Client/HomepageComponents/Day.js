@@ -46,13 +46,13 @@ const Day = (props) => {
   // console.log('dayarr', dayArr);
 
   return (
-    <>
+    <div className='day-cal'>
       <ul>
-        <h3>{props.day}</h3>
+        <h3 className='day-title'>{props.day}</h3>
 
         {resEle}
       </ul>
-    </>
+    </div>
   );
 };
 
