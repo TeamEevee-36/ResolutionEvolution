@@ -192,3 +192,9 @@ h3 {
   display: block;
   color: black;
 }
+.delete-btn {
+  height: 1rem;
+  width: 1rem;
+  justify-items: center;
+  font-size: 20px;
+}
