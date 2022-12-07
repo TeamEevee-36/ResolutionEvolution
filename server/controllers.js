@@ -15,6 +15,9 @@ controller.loginController = async (req, res, next) => {
       console.log('rows[0]', rows[0]);
       if (password === rows[0].password) {
         res.locals.signedIn = rows[0].id;
+        res.cookie('user_id', rows[0].id, {
+          maxAge: 3600000,
+        });
         return next();
       } else {
         res.locals.signedIn = 'incorrect password';
@@ -74,6 +77,36 @@ controller.signUpController = async (req, res, next) => {
   }
 };
 
+controller.addResController = async (req, res, next) => {
+  try {
+    const {
+      resolution_name,
+      resolution_desc,
+      category_name,
+      days_todo,
+      resolution_status,
+    } = req.body;
+    const { user_id } = req.cookies;
+    console.log('req body in rescontroller', req.body);
+    const addResQuery = `INSERT INTO resolutions(resolution_name, resolution_desc, category_name, user_id, days_todo, resolution_status)VALUES($1, $2, $3, $4, $5, $6)`;
+    const values = [
+      resolution_name,
+      resolution_desc,
+      category_name,
+      user_id,
+      days_todo,
+      resolution_status,
+    ];
+    const { rows } = await User.query(addResQuery, values);
+    res.locals.resolution = rows[0];
+  } catch (err) {
+    return next({
+      log: `error occured in addRes: ${err}`,
+      status: 400,
+      message: 'error in addRes',
+    });
+  }
+};
 //query for username, if username exists move to next step, if not, return username doesn't exist error
 //query for password, conditional check if passwords match, if so, return success
 //if not, return specific password incorrect error

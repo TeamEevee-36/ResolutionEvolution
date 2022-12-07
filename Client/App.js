@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Login from './Login';
-import { useState} from 'react';
+import { useState } from 'react';
 import SignUp from './SignUp';
 import Homepage from './Homepage';
-import styles from './_index.css';
 import Navbar from './Navbar';
+import Cookies from 'js-cookie';
+
+import styles from './_index.css';
 
 //login path should render the login component
 //have to pass a link to the path - theres
 
 //define routes within app rather than
 const App = () => {
-//   return <Login />
-const [currentUserID, setCurrentUserID] = useState(false);
-// someone logs in -> ajax req, returned value from ajax req includes currentUserID -> setCurrentUserID = 'returned id'
-console.log(currentUserID) //12
+  const [currentUserID, setCurrentUserID] = useState(null);
+
+  useEffect(() => {
+    const cookieId = Cookies.get();
+    setCurrentUserID(cookieId['user_id']);
+  });
+  //   return <Login />
+  // someone logs in -> ajax req, returned value from ajax req includes currentUserID -> setCurrentUserID = 'returned id'
   return (
     <div>
       <Navbar />
@@ -40,7 +46,7 @@ console.log(currentUserID) //12
           }
         />
       </Routes>
-    </>
+    </div>
   );
 };
 

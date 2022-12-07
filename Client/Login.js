@@ -38,7 +38,8 @@ const Login = (props) => {
         } else if (data === 'incorrect password') {
           return alert('Password is incorrect');
         } else {
-          props.setCurrentUserID(data.id);
+          props.setCurrentUserID(data);
+
           return navigate('/');
         }
       });
