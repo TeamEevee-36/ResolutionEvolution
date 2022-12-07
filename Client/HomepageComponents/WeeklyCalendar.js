@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Day from './Day';
 const WeeklyCalendar = (props) => {
+  const [trigger, setTrigger] = useState(false);
+  const [single, setSingle] = useState({});
   const daysArr = {
     Monday: [],
     Tuesday: [],
@@ -28,7 +30,7 @@ const WeeklyCalendar = (props) => {
   // }, []);
 
   useEffect(() => {
-    console.log('props.resolutionData: ', props.resolutionData);
+    // console.log('props.resolutionData: ', props.resolutionData);
 
     //console.log('resdata2', resolutionData3);
     // looping through array of resolution objects
@@ -44,7 +46,7 @@ const WeeklyCalendar = (props) => {
         return ele.slice(1, ele.length - 1);
         // console.log(ele);
       });
-      console.log('resdata3', resolutionData3);
+      // console.log('resdata3', resolutionData3);
 
       // console.log('days objectt?: ', props.resolutionData[i].days_todo);
       //console.log('type', typeof props.resolutionData[i].days_todo);
@@ -52,19 +54,24 @@ const WeeklyCalendar = (props) => {
         daysArr[ele].push(props.resolutionData[i]);
       });
     }
-    console.log(daysArr);
+    // console.log(daysArr);
+    // console.log('daysArr', daysArr['Friday']);
+    setTrigger(true);
+    setSingle(daysArr);
   }, []);
-
   return (
     <>
-      <h1>Checking load time for weekly calendar</h1>
-      <Day day='Monday' resList={daysArr['Monday']} />
-      <Day day='Tuesday' resList={daysArr['Tuesday']} />
-      <Day day='Wednesday' resList={daysArr['Wednesday']} />
-      <Day day='Thursday' resList={daysArr['Thursday']} />
-      <Day day='Friday' resList={daysArr['Friday']} />
-      <Day day='Saturday' resList={daysArr['Saturday']} />
-      <Day day='Sunday' resList={daysArr['Sunday']} />
+      {trigger ? (
+        <div id='week-cal'>
+          <Day day='Monday' resList={single['Monday']} />
+          <Day day='Tuesday' resList={single['Tuesday']} />
+          <Day day='Wednesday' resList={single['Wednesday']} />
+          <Day day='Thursday' resList={single['Thursday']} />
+          <Day day='Friday' resList={single['Friday']} />
+          <Day day='Saturday' resList={single['Saturday']} />
+          <Day day='Sunday' resList={single['Sunday']} />
+        </div>
+      ) : null}
     </>
   );
 };

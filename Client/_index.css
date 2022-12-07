@@ -88,3 +88,8 @@ head {
   gap: 0.25rem;
   align-items: center;
 }
+
+#week-cal {
+  display: flex;
+  flex-direction: row;
+}
