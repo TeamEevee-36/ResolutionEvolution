@@ -2,6 +2,7 @@
 import { TextField, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import Eevee from './assets/Eevee.png';
 
 //functional components
 const Login = (props) => {
@@ -19,7 +20,7 @@ const Login = (props) => {
   const [password, passwordOnChange] = useInput('');
 
   const signIn = () => {
-    fetch('/api', {
+    fetch('/api/signIn', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,14 +46,42 @@ const Login = (props) => {
   //this is where we can use other fucntions like useffect
   //return statement that has like JSX define
   return (
-    <div>
+    <div className='login-container'>
       <h1>Login</h1>
+      <img src={Eevee} width='250px' height='250px'></img>
       <div className='login-text-fields'>
+        <h1>Username</h1>
         <TextField value={username} onChange={usernameOnChange}></TextField>
+        <h1>Password</h1>
         <TextField value={password} onChange={passwordOnChange}></TextField>
-        <Button type='submit' value='Submit' onClick={signIn}>
-          Submit
-        </Button>
+        <div className='signup-buttons'>
+          <Button
+            sx={{
+              backgroundColor: '#8c5383',
+              ':hover': { backgroundColor: '#ac72a3' },
+            }}
+            type='submit'
+            value='Submit'
+            onClick={signIn}
+            variant='contained'
+          >
+            Submit
+          </Button>
+          <Button
+            sx={{
+              backgroundColor: '#8c5383',
+              ':hover': { backgroundColor: '#ac72a3' },
+            }}
+            type='submit'
+            value='Submit'
+            onClick={() => {
+              navigate('/signup');
+            }}
+            variant='contained'
+          >
+            Register
+          </Button>
+        </div>
       </div>
     </div>
   );
