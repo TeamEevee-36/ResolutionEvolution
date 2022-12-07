@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Login from './Login';
-import { useState } from 'react';
+import { useState} from 'react';
 import SignUp from './SignUp';
+import Homepage from './Homepage';
 import styles from './_index.css';
 import Navbar from './Navbar';
 
@@ -11,10 +12,10 @@ import Navbar from './Navbar';
 
 //define routes within app rather than
 const App = () => {
-  //   return <Login />
-  const [currentUserID, setCurrentUserID] = useState(null);
-  // someone logs in -> ajax req, returned value from ajax req includes currentUserID -> setCurrentUserID = 'returned id'
-  console.log(currentUserID); //12
+//   return <Login />
+const [currentUserID, setCurrentUserID] = useState(false);
+// someone logs in -> ajax req, returned value from ajax req includes currentUserID -> setCurrentUserID = 'returned id'
+console.log(currentUserID) //12
   return (
     <div>
       <Navbar />
@@ -29,8 +30,17 @@ const App = () => {
           }
         />
         <Route path='/signup' element={<SignUp />} />
+        <Route
+          path='/'
+          element={
+            <Homepage
+              currentUserID={currentUserID}
+              setCurrentUserID={setCurrentUserID}
+            />
+          }
+        />
       </Routes>
-    </div>
+    </>
   );
 };
 
