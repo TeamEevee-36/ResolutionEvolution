@@ -122,8 +122,42 @@ controller.getResolutions = async (req, res, next) => {
     });
   }
 };
+
+controller.updateResolution = async (req, res, next) =>{
+  try{
+    const {resolution_id, progressUpdate} = req.body;
+    const progressUpdateQuery = 'UPDATE resolutions SET resolution_status = $1 WHERE id = $2;';
+    const values = [progressUpdate,resolution_id];
+    const {rows} = await User.query(progressUpdateQuery, values);
+    return next();
+  }
+  catch (err) {
+    return next({
+      log: `error occured in updateResolution: ${err}`,
+      status: 400,
+      message: 'error in updateResolution',
+    });
+  }
+};
 //query for username, if username exists move to next step, if not, return username doesn't exist error
 //query for password, conditional check if passwords match, if so, return success
 //if not, return specific password incorrect error
+
+controller.deleteResolution = async (req, res, next) =>{
+  try{
+    const {resolution_id, progressUpdate} = req.body;
+    const progressUpdateQuery = 'DELETE FROM resolutions WHERE id = $1;';
+    const values = [resolution_id];
+    const {rows} = await User.query(progressUpdateQuery, values);
+    return next();
+  }
+  catch (err) {
+    return next({
+      log: `error occured in updateResolution: ${err}`,
+      status: 400,
+      message: 'error in updateResolution',
+    });
+  }
+};
 
 module.exports = controller;

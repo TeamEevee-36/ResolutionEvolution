@@ -23,4 +23,12 @@ router.get('/getresolutions', controller.getResolutions, (req, res) => {
   return res.status(201).json(res.locals.getResolutions);
 });
 
+router.post('/updateResolution', controller.updateResolution, (req, res) => {
+  return res.status(201);
+})
+
+router.post('/deleteResolution', controller.deleteResolution, (req, res) => {
+  return res.status(201);
+})
+
 module.exports = router;
