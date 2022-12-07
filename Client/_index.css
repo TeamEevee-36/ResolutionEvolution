@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+  font-family: 'Kumbh Sans';
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin-top: 9em;
+  padding: 0;
+}
+head {
+  margin: 0;
+  padding: 0;
+}
+
+#navbar {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  color: aliceblue;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  padding-left: 1rem;
+  background-color: #4a5899;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.sign-up-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.signup-buttons {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1em;
+  gap: 1em;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  gap: 1em;
+}

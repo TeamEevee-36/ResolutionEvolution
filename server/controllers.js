@@ -1,4 +1,5 @@
 // const express = require('express');
+const { EvalSourceMapDevToolPlugin } = require('webpack');
 const User = require('./models/models');
 
 const controller = {};
@@ -34,13 +35,35 @@ controller.loginController = async (req, res, next) => {
   }
 };
 
+controller.checkUsernameController = async (req, res, next) => {
+  try {
+    const { username, email, password } = req.body;
+
+    const checkUsernameQuery = `SELECT * FROM users WHERE username = '${username}'`;
+    const { rows } = await User.query(checkUsernameQuery);
+
+    if (rows[0]) {
+      return res.json('Username taken');
+    } else {
+      return next();
+    }
+  } catch (err) {
+    return next({
+      log: `error occured in check username: ${err}`,
+      status: 400,
+      message: 'error in check username',
+    });
+  }
+};
+
 controller.signUpController = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
+    const checkUsernameQuery = `SELECT * FROM users WHERE username = '${username}'`;
     const signUpQuery = `INSERT INTO users(username, email, password) VALUES ($1, $2, $3) RETURNING *`;
     const values = [username, email, password];
     const { rows } = await User.query(signUpQuery, values);
-    res.locals.signedUp = rows[0];
+    res.locals.signedUp = 'Account created! Please login';
     return next();
   } catch (err) {
     return next({

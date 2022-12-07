@@ -4,6 +4,8 @@ import Login from './Login';
 import { useState} from 'react';
 import SignUp from './SignUp';
 import Homepage from './Homepage';
+import styles from './_index.css';
+import Navbar from './Navbar';
 
 //login path should render the login component
 //have to pass a link to the path - theres
@@ -15,7 +17,8 @@ const [currentUserID, setCurrentUserID] = useState(false);
 // someone logs in -> ajax req, returned value from ajax req includes currentUserID -> setCurrentUserID = 'returned id'
 console.log(currentUserID) //12
   return (
-    <>
+    <div>
+      <Navbar />
       <Routes>
         <Route
           path='/login'
